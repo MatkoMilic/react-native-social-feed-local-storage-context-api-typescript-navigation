@@ -1,16 +1,16 @@
-import React, { FC } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { FC } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
 interface NavigationProviderProps {
   children?: React.ReactNode;
 }
 
 export const NavigationProvider: FC<NavigationProviderProps> = ({
-  children,
+  children
 }) => {
   return <NavigationContainer>{children}</NavigationContainer>;
 };
 
 NavigationProvider.defaultProps = {
-  children: undefined,
+  children: undefined
 };

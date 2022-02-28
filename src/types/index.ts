@@ -1,8 +1,8 @@
 export type {
   IMainNavScreenProps,
-  MainNavigationType,
-} from "./IMainNavScreenProps/IMainNavScreenProps";
+  MainNavigationType
+} from './IMainNavScreenProps/IMainNavScreenProps';
 export type {
   IOnboardingNavScreenProps,
-  OnboardingNavigationType,
-} from "./IOnboardingNavScreenProps/IOnboardingNavScreenProps";
+  OnboardingNavigationType
+} from './IOnboardingNavScreenProps/IOnboardingNavScreenProps';

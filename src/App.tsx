@@ -1,6 +1,6 @@
-import React from "react";
-import { RootNavigator } from "./navigators";
-import { NavigationProvider } from "./components";
+import React from 'react';
+import { RootNavigator } from './navigators';
+import { NavigationProvider } from './components';
 
 const App: React.FC = () => {
   return (

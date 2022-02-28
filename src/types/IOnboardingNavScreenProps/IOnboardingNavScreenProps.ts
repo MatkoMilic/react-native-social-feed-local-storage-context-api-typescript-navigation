@@ -1,8 +1,8 @@
-import {CompositeNavigationProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   OnboardingStackParamList,
-  RootNavigatorParamsList,
+  RootNavigatorParamsList
 } from '../../constants';
 
 export type OnboardingNavigationType = CompositeNavigationProp<

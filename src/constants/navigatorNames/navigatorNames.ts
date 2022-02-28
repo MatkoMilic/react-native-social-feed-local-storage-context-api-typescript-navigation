@@ -1,4 +1,4 @@
-import { RootNavigatorNameType } from "../navigatorTypes/navigatorTypes";
+import { RootNavigatorNameType } from '../navigatorTypes/navigatorTypes';
 
 interface INavigatorNames {
   MAIN_NAVIGATOR: RootNavigatorNameType;
@@ -6,6 +6,6 @@ interface INavigatorNames {
 }
 
 export const navigatorNames: INavigatorNames = {
-  MAIN_NAVIGATOR: "MainNavigator",
-  ONBOARDING_NAVIGATOR: "OnboardingNavigator",
+  MAIN_NAVIGATOR: 'MainNavigator',
+  ONBOARDING_NAVIGATOR: 'OnboardingNavigator'
 };

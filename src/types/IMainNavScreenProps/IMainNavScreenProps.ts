@@ -1,6 +1,6 @@
-import {CompositeNavigationProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {MainStackParamList, RootNavigatorParamsList} from '../../constants';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { MainStackParamList, RootNavigatorParamsList } from '../../constants';
 
 export type MainNavigationType = CompositeNavigationProp<
   NativeStackNavigationProp<MainStackParamList>,
