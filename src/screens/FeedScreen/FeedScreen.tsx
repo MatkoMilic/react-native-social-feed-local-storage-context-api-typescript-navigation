@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Button, Image, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
-import { ScreenContainer } from "../../components";
+import { Header, ScreenContainer } from "../../components";
 import { IMainNavScreenProps } from "../../types";
+import { styles } from "./style";
 
 interface FeedScreenProps extends IMainNavScreenProps {}
 
 const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
   const [image, setImage] = useState<any>();
+
+  const navigateToCreatePostScreen = async () => {
+    navigation.navigate("CreatePostScreen");
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -26,11 +32,16 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
 
   return (
     <ScreenContainer>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <SafeAreaProvider>
+        <Header
+          headerTitle="Factory X Feed"
+          rightIcon="add-photo-alternate"
+          onPressRightIcon={navigateToCreatePostScreen}
+        />
+      </SafeAreaProvider>
+      <View style={styles.imageAndTextContainer}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
+        {image && <Image source={{ uri: image }} style={styles.image} />}
       </View>
     </ScreenContainer>
   );
