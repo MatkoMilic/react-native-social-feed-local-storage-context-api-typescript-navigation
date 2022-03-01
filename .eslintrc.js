@@ -23,6 +23,10 @@ module.exports = {
       files: ["*.ts", "*.tsx"],
       rules: {
         "no-undef": "off",
+        singleQuote: true,
+        quotes: [0, "double"],
+        "comma-dangle": "off",
+        "@typescript-eslint/comma-dangle": "off",
       },
     },
   ],
