@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
-import { LOGIN_SCREEN, navigatorNames } from "../../constants";
 import { IOnboardingNavScreenProps } from "../../types";
 import { ScreenContainer } from "../../components";
 import { styles } from "./style";
