@@ -19,7 +19,7 @@ const MainStack = createNativeStackNavigator();
 const MainNavigator: FC<MainNavigatorProps> = ({ navigation }) => {
   return (
     <MainStack.Navigator
-      // screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName={FEED_SCREEN}
     >
       <MainStack.Screen name={FEED_SCREEN} component={FeedScreen} />
