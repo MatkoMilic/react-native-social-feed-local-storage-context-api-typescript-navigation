@@ -1,3 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({});
+export const styles = StyleSheet.create({
+  loginContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginVertical: 20,
+  },
+});
