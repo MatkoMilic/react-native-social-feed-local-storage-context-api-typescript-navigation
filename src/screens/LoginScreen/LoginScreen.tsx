@@ -2,52 +2,35 @@ import React from "react";
 import { Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import { ScreenContainer } from "../../components";
+import { FEED_SCREEN, navigatorNames } from "../../constants";
 import { IOnboardingNavScreenProps } from "../../types";
+import { styles } from "./style";
 
 interface LoginScreenProps extends IOnboardingNavScreenProps {}
 
-const CustomButtonTitle = () => {
-  return (
-    <View style={{ flexDirection: "column" }}>
-      <Text style={{ fontWeight: "bold", fontSize: 18 }}>Factory X</Text>
-      <Text style={{ fontStyle: "italic", fontSize: 12 }}>
-        RN Factory X Demo App
-      </Text>
-    </View>
-  );
-};
-
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+  const goToFeed = () => {
+    navigation.replace(navigatorNames.MAIN_NAVIGATOR, { screen: FEED_SCREEN });
+  };
   return (
-    <ScreenContainer>
+    <ScreenContainer style={styles.loginContainer}>
       <Text>Welcome to Factory X Login Page!</Text>
-      <View>
+      <View style={styles.buttonContainer}>
         <Button
-          title={<CustomButtonTitle />}
-          titleStyle={{ fontWeight: "bold", fontSize: 18 }}
-          linearGradientProps={{
-            colors: ["#FF9800", "#F44336"],
-            start: [1, 0],
-            end: [0.2, 0],
-          }}
+          title="Go to Feed"
+          onPress={goToFeed}
+          titleStyle={{ fontWeight: "500" }}
           buttonStyle={{
-            borderWidth: 0,
+            backgroundColor: "rgba(199, 43, 98, 1)",
             borderColor: "transparent",
-            borderRadius: 20,
+            borderWidth: 0,
           }}
           containerStyle={{
             width: 200,
+            height: 45,
             marginHorizontal: 50,
             marginVertical: 10,
           }}
-          icon={{
-            name: "arrow-right",
-            type: "font-awesome",
-            size: 15,
-            color: "white",
-          }}
-          iconRight
-          iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
         />
       </View>
     </ScreenContainer>
