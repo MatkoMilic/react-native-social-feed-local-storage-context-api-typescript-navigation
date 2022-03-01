@@ -1,4 +1,4 @@
-import { NavigatorScreenParams } from '@react-navigation/native';
+import { NavigatorScreenParams } from "@react-navigation/native";
 
 export type OnboardingStackParamList = {
   LoadingScreen: undefined;
@@ -6,6 +6,7 @@ export type OnboardingStackParamList = {
 };
 export type MainStackParamList = {
   FeedScreen: undefined;
+  CreatePostScreen: undefined;
 };
 export type RootNavigatorParamsList = {
   MainNavigator: NavigatorScreenParams<MainStackParamList>;
