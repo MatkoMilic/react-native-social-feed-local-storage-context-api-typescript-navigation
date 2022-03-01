@@ -19,18 +19,9 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         <Button
           title="Go to Feed"
           onPress={goToFeed}
-          titleStyle={{ fontWeight: "500" }}
-          buttonStyle={{
-            backgroundColor: "rgba(199, 43, 98, 1)",
-            borderColor: "transparent",
-            borderWidth: 0,
-          }}
-          containerStyle={{
-            width: 200,
-            height: 45,
-            marginHorizontal: 50,
-            marginVertical: 10,
-          }}
+          titleStyle={styles.titleStyle}
+          buttonStyle={styles.buttonStyle}
+          containerStyle={styles.buttonContainerStyle}
         />
       </View>
     </ScreenContainer>
