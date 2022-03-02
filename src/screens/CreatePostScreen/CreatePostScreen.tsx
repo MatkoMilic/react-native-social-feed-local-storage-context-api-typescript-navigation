@@ -1,47 +1,46 @@
 import React, { useState } from "react";
-import { Button, Image, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import { View } from "react-native";
 import { Header, ScreenContainer } from "../../components";
-import { IMainNavScreenProps } from "../../types";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Formik } from "formik";
 import { styles } from "./style";
+import { IMainNavScreenProps } from "../../types";
+import { postSchema } from "../../validation";
+import { PostForm } from "../../components";
+import { useOnSubmit } from "../../utils";
 
 interface CreatePostScreenProps extends IMainNavScreenProps {}
 
 const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
-  const [image, setImage] = useState<any>();
+  const { createPost } = useOnSubmit(navigation);
 
   const navigateToFeedScreen = async () => {
     navigation.replace("FeedScreen");
-  };
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
   };
 
   return (
     <ScreenContainer>
       <SafeAreaProvider>
         <Header
-          headerTitle="Create your new post!"
+          headerTitle="Do new post!"
           leftIcon="arrow-back"
           onPressLeftIcon={navigateToFeedScreen}
         />
       </SafeAreaProvider>
       <View style={styles.imageAndTextContainer}>
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && <Image source={{ uri: image }} style={styles.image} />}
+        {/* <Button
+          title="Pick an image from camera roll"
+          onPress={() => pickImage(setImage)}
+        /> */}
+        {/* {image && <Image source={{ uri: image }} style={styles.image} />} */}
+        <Formik
+          initialValues={{ postImage: "", postDescription: "" }}
+          onSubmit={(values) => {
+            createPost(values.postImage, values.postDescription);
+          }}
+          validationSchema={postSchema}
+          component={PostForm}
+        />
       </View>
     </ScreenContainer>
   );
