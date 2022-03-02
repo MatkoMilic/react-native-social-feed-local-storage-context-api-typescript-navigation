@@ -3,7 +3,7 @@ export interface IPostValues {
   postDescription: string;
 }
 
-export const initialUserLoginValues = (): IPostValues => ({
+export const initialPostValues = (): IPostValues => ({
   postImage: "",
   postDescription: "",
 });
