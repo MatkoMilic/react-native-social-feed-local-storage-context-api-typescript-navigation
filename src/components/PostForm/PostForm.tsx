@@ -1,5 +1,14 @@
-import React from "react";
-import { Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  TextInput,
+  View,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from "react-native";
 import { Button } from "react-native-elements";
 import { FormikProps } from "formik";
 import { pickImage } from "../../constants";
@@ -16,33 +25,54 @@ const PostForm: React.FC<FormikProps<FormikValues>> = ({
   values,
   handleSubmit,
 }) => {
+  const [image, setImage] = useState("");
   return (
-    <View style={styles.postFormContainer}>
-      <Button
-        icon={{ name: "add-photo-alternate", color: "white" }}
-        title="Pick an image"
-        onPress={() => {
-          pickImage(handleChange("postImage"));
-        }}
-      />
-      <Text style={styles.inputErrorMessage}>{errors.postImage}</Text>
-      <TextInput
-        placeholder="Your description please"
-        onChangeText={handleChange("postDescription")}
-        value={values.postDescription}
-      />
-      <Text style={styles.inputErrorMessage}>{errors.postDescription}</Text>
-      <Button
-        buttonStyle={styles.postButton}
-        title="Post"
-        icon={{
-          name: "post-add",
-          size: 20,
-          color: "white",
-        }}
-        onPress={handleSubmit}
-      />
-    </View>
+    <ScrollView
+      style={styles.postFormContainer}
+      keyboardShouldPersistTaps="always"
+    >
+      <View>
+        {image ? (
+          <Image
+            source={{ uri: image }}
+            resizeMode="cover"
+            style={styles.image}
+          />
+        ) : (
+          <TouchableOpacity
+            style={styles.imagePlaceholder}
+            //icon={{ name: "add-photo-alternate", color: "white" }}
+            onPress={() => {
+              pickImage(handleChange("postImage"), setImage);
+            }}
+          >
+            <Text>Press to upload new image</Text>
+          </TouchableOpacity>
+        )}
+        <Text style={styles.inputErrorMessage}>{errors.postImage}</Text>
+      </View>
+      <View>
+        <KeyboardAvoidingView behavior={"padding"}>
+          <TextInput
+            placeholder="Add a description to your post"
+            onChangeText={handleChange("postDescription")}
+            value={values.postDescription}
+            multiline
+          />
+          <Text style={styles.inputErrorMessage}>{errors.postDescription}</Text>
+          <Button
+            buttonStyle={styles.postButton}
+            title="Post"
+            icon={{
+              name: "post-add",
+              size: 20,
+              color: "white",
+            }}
+            onPress={handleSubmit}
+          />
+        </KeyboardAvoidingView>
+      </View>
+    </ScrollView>
   );
 };
 
