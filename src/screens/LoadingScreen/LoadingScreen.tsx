@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import { IOnboardingNavScreenProps } from "../../types";
 import { ScreenContainer } from "../../components";
-import { styles } from "./style";
 
 interface LoadingScreenProps extends IOnboardingNavScreenProps {}
 
@@ -24,7 +22,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ navigation }) => {
     <ScreenContainer>
       <StatusBar />
       <View>
-        <Text>Loading Factory X app...</Text>
+        <Text>
+          Loading Factory X app text...a loading icon here would be nice to add
+          in the app update.
+        </Text>
       </View>
     </ScreenContainer>
   );

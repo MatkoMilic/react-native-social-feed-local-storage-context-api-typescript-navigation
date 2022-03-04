@@ -40,7 +40,6 @@ const PostForm: React.FC<FormikProps<FormikValues>> = ({
         ) : (
           <TouchableOpacity
             style={styles.imagePlaceholder}
-            //icon={{ name: "add-photo-alternate", color: "white" }}
             onPress={() => {
               pickImage(handleChange("postImage"), setImage);
             }}

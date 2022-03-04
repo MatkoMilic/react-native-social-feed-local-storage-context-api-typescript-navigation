@@ -1,6 +1,5 @@
 import React from "react";
 import { SafeAreaView, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Formik } from "formik";
 import { Header, ScreenContainer, PostForm } from "../../components";
 import { IMainNavScreenProps } from "../../types";

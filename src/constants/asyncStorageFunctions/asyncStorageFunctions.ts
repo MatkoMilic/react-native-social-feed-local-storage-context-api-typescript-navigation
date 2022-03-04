@@ -11,7 +11,6 @@ export const getAllAsyncStorageData = async () => {
         allItemsFromAS[key as keyof IPostValues] = val;
       }
     }
-    const result = Object.keys(allItemsFromAS);
     return (
       //Useful console.log for displaying all items from Async Storage so I will leave it here
       console.log("All items: ", allItemsFromAS)

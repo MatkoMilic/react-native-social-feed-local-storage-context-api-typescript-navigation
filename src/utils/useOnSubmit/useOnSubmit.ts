@@ -7,6 +7,7 @@ import { checkPostsContext } from "../../components";
 
 const useOnSubmit = (navigation: MainNavigationType) => {
   const { setNewPost } = checkPostsContext();
+
   const createPost = async (postImage: string, postDescription: string) => {
     const posts = await AsyncStorage.getItem("posts");
     if (posts) {
