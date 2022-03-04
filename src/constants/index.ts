@@ -5,8 +5,12 @@ import {
   CREATEPOST_SCREEN,
 } from "./screenNames/screenNames";
 import { navigatorNames } from "./navigatorNames/navigatorNames";
+import { HASHTAG_FORMATTER } from "./HASHTAG_FORMATTER/HASHTAG_FORMATTER";
 import { pickImage } from "./pickImage/pickImage";
-import { getAllAsyncStorageData } from "./getAllAsyncStorageItems/getAllAsyncStorageItems";
+import {
+  getAllAsyncStorageData,
+  clearEntireAsyncStorage,
+} from "./asyncStorageFunctions/asyncStorageFunctions";
 import {
   OnboardingStackParamList,
   MainStackParamList,
@@ -22,6 +26,8 @@ export {
   navigatorNames,
   pickImage,
   getAllAsyncStorageData,
+  clearEntireAsyncStorage,
+  HASHTAG_FORMATTER,
 };
 
 export type {
