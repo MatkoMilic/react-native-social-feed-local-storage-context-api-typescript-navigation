@@ -1,31 +1,46 @@
-import React, { useState } from "react";
-import { Button, Image, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Header, ScreenContainer } from "../../components";
-import { IMainNavScreenProps } from "../../types";
+import React from "react";
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  SafeAreaView,
+} from "react-native";
+import { Header, PostListItem, ScreenContainer } from "../../components";
+import { IMainNavScreenProps, IPostValues } from "../../types";
+import { usePosts } from "../../utils";
 import { styles } from "./style";
 
 interface FeedScreenProps extends IMainNavScreenProps {}
 
 const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
-  const [image, setImage] = useState<string>();
-
+  const { posts } = usePosts();
   const navigateToCreatePostScreen = async () => {
     navigation.navigate("CreatePostScreen");
   };
 
+  const renderPost: ListRenderItem<IPostValues> = ({ item }) => (
+    <PostListItem post={item} key={item.uniquePostID} />
+  );
+
   return (
     <ScreenContainer>
-      <SafeAreaProvider>
+      <SafeAreaView>
         <Header
+          containerStyle={styles.containerStyleHeader}
           headerTitle="Factory X Feed"
           rightIcon="add-photo-alternate"
           onPressRightIcon={navigateToCreatePostScreen}
         />
-      </SafeAreaProvider>
-      <View style={styles.imageAndTextContainer}>
-        {/* {image && <Image source={{ uri: image }} style={styles.image} />} */}
-      </View>
+      </SafeAreaView>
+      {!posts ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={posts}
+          renderItem={renderPost}
+          keyExtractor={(item) => item.uniquePostID}
+        />
+      )}
     </ScreenContainer>
   );
 };
