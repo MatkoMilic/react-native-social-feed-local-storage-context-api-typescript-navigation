@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
   },
   imageAndTextContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  containerStyleHeader: {
+    paddingTop: 0,
   },
 });
