@@ -3,8 +3,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
 import { IPostValues, MainNavigationType } from "../../types";
 import { navigatorNames, FEED_SCREEN } from "../../constants";
+import { checkPostsContext } from "../../components";
 
 const useOnSubmit = (navigation: MainNavigationType) => {
+  const { setNewPost } = checkPostsContext();
   const createPost = async (postImage: string, postDescription: string) => {
     const posts = await AsyncStorage.getItem("posts");
     if (posts) {
@@ -19,6 +21,7 @@ const useOnSubmit = (navigation: MainNavigationType) => {
         if (postImage == "" && postDescription.trim() == "") {
           Alert.alert("You cannot post an empty post.");
         } else {
+          setNewPost(parsedPosts);
           await AsyncStorage.setItem(
             "posts",
             JSON.stringify(parsedPosts)
