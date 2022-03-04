@@ -5,15 +5,21 @@ import {
   ListRenderItem,
   SafeAreaView,
 } from "react-native";
-import { Header, PostListItem, ScreenContainer } from "../../components";
+import {
+  Header,
+  PostListItem,
+  ScreenContainer,
+  checkPostsContext,
+} from "../../components";
 import { IMainNavScreenProps, IPostValues } from "../../types";
-import { usePosts } from "../../utils";
 import { styles } from "./style";
+//import { usePosts } from "../../utils";
 
 interface FeedScreenProps extends IMainNavScreenProps {}
 
 const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
-  const { posts } = usePosts();
+  //const { posts } = usePosts();
+  const { postValues } = checkPostsContext();
   const navigateToCreatePostScreen = async () => {
     navigation.navigate("CreatePostScreen");
   };
@@ -32,11 +38,11 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
           onPressRightIcon={navigateToCreatePostScreen}
         />
       </SafeAreaView>
-      {!posts ? (
+      {!postValues ? (
         <ActivityIndicator />
       ) : (
         <FlatList
-          data={posts}
+          data={postValues}
           renderItem={renderPost}
           keyExtractor={(item) => item.uniquePostID}
         />
