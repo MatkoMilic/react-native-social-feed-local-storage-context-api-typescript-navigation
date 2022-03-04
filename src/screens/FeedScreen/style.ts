@@ -8,4 +8,9 @@ export const styles = StyleSheet.create({
   containerStyleHeader: {
     paddingTop: 0,
   },
+  noPostsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+  },
 });
