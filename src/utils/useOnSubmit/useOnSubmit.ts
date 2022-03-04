@@ -2,37 +2,36 @@ import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
 import { IPostValues, MainNavigationType } from "../../types";
-import {
-  navigatorNames,
-  FEED_SCREEN,
-  getAllAsyncStorageData,
-} from "../../constants";
+import { navigatorNames, FEED_SCREEN } from "../../constants";
 
 const useOnSubmit = (navigation: MainNavigationType) => {
   const createPost = async (postImage: string, postDescription: string) => {
-    try {
-      const postDetails: IPostValues = {
-        postImage,
-        postDescription,
-      };
-      if (!postImage && !postDescription) {
-        Alert.alert("You cannot post empty post.");
-      } else {
-        await AsyncStorage.setItem(
-          uuid.v4().toString(),
-          JSON.stringify(postDetails)
-        ).catch((error) => {
-          console.log(error);
-        });
-        //calling of getAllAsyncStorageData console.logs out important
-        //data for us to see how the app works so for now I will leave it here
-        getAllAsyncStorageData();
-        navigation.replace(navigatorNames.MAIN_NAVIGATOR, {
-          screen: FEED_SCREEN,
-        });
+    const posts = await AsyncStorage.getItem("posts");
+    if (posts) {
+      const parsedPosts: IPostValues[] = JSON.parse(posts);
+      try {
+        const postDetails: IPostValues = {
+          postImage,
+          postDescription,
+          uniquePostID: uuid.v4().toString(),
+        };
+        parsedPosts.push(postDetails);
+        if (postImage == "" && postDescription.trim() == "") {
+          Alert.alert("You cannot post an empty post.");
+        } else {
+          await AsyncStorage.setItem(
+            "posts",
+            JSON.stringify(parsedPosts)
+          ).catch((error) => {
+            console.log(error);
+          });
+          navigation.replace(navigatorNames.MAIN_NAVIGATOR, {
+            screen: FEED_SCREEN,
+          });
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
   return { createPost };
