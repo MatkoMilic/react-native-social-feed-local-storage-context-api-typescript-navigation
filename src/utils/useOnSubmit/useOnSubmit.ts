@@ -10,32 +10,32 @@ const useOnSubmit = (navigation: MainNavigationType) => {
 
   const createPost = async (postImage: string, postDescription: string) => {
     const posts = await AsyncStorage.getItem("posts");
+    let parsedPosts: IPostValues[] = [];
     if (posts) {
-      const parsedPosts: IPostValues[] = JSON.parse(posts);
-      try {
-        const postDetails: IPostValues = {
-          postImage,
-          postDescription,
-          uniquePostID: uuid.v4().toString(),
-        };
-        parsedPosts.push(postDetails);
-        if (postImage == "" && postDescription.trim() == "") {
-          Alert.alert("You cannot post an empty post.");
-        } else {
-          setNewPost(parsedPosts);
-          await AsyncStorage.setItem(
-            "posts",
-            JSON.stringify(parsedPosts)
-          ).catch((error) => {
+      parsedPosts = JSON.parse(posts);
+    }
+    try {
+      const postDetails: IPostValues = {
+        postImage,
+        postDescription,
+        uniquePostID: uuid.v4().toString(),
+      };
+      parsedPosts.push(postDetails);
+      if (postImage == "" && postDescription.trim() == "") {
+        Alert.alert("You cannot post an empty post.");
+      } else {
+        setNewPost(parsedPosts);
+        await AsyncStorage.setItem("posts", JSON.stringify(parsedPosts)).catch(
+          (error) => {
             console.log(error);
-          });
-          navigation.replace(navigatorNames.MAIN_NAVIGATOR, {
-            screen: FEED_SCREEN,
-          });
-        }
-      } catch (err) {
-        console.log(err);
+          }
+        );
+        navigation.replace(navigatorNames.MAIN_NAVIGATOR, {
+          screen: FEED_SCREEN,
+        });
       }
+    } catch (err) {
+      console.log(err);
     }
   };
   return { createPost };
