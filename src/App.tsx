@@ -1,12 +1,15 @@
 import React from "react";
 import { RootNavigator } from "./navigators";
 import { NavigationProvider } from "./components";
+import { PostsProvider } from "./components/PostsProvider/PostsProvider";
 
 const App: React.FC = () => {
   return (
-    <NavigationProvider>
-      <RootNavigator />
-    </NavigationProvider>
+    <PostsProvider>
+      <NavigationProvider>
+        <RootNavigator />
+      </NavigationProvider>
+    </PostsProvider>
   );
 };
 
