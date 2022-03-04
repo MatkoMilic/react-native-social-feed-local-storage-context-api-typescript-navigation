@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from "react-native";
 import { Button } from "react-native-elements";
