@@ -1,1 +1,1 @@
-export { PostContext, PostProvider } from "./PostsProvider";
+export { checkPostsContext, PostsProvider } from "./PostsProvider";

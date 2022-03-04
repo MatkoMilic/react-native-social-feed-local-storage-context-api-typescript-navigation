@@ -10,6 +10,7 @@ import { pickImage } from "./pickImage/pickImage";
 import {
   getAllAsyncStorageData,
   clearEntireAsyncStorage,
+  getAllPosts,
 } from "./asyncStorageFunctions/asyncStorageFunctions";
 import {
   OnboardingStackParamList,
@@ -28,6 +29,7 @@ export {
   getAllAsyncStorageData,
   clearEntireAsyncStorage,
   HASHTAG_FORMATTER,
+  getAllPosts,
 };
 
 export type {
