@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { View } from "react-native";
-import { Header, ScreenContainer } from "../../components";
+import React from "react";
+import { SafeAreaView, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Formik } from "formik";
-import { styles } from "./style";
+import { Header, ScreenContainer, PostForm } from "../../components";
 import { IMainNavScreenProps } from "../../types";
 import { postSchema } from "../../validation";
-import { PostForm } from "../../components";
 import { useOnSubmit } from "../../utils";
+import { styles } from "./style";
 
 interface CreatePostScreenProps extends IMainNavScreenProps {}
 
@@ -20,23 +19,19 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
 
   return (
     <ScreenContainer>
-      <SafeAreaProvider>
+      <SafeAreaView>
         <Header
-          headerTitle="Do new post!"
+          containerStyle={styles.containerStyleHeader}
+          headerTitle="Make a post!"
           leftIcon="arrow-back"
           onPressLeftIcon={navigateToFeedScreen}
         />
-      </SafeAreaProvider>
+      </SafeAreaView>
       <View style={styles.imageAndTextContainer}>
-        {/* <Button
-          title="Pick an image from camera roll"
-          onPress={() => pickImage(setImage)}
-        /> */}
-        {/* {image && <Image source={{ uri: image }} style={styles.image} />} */}
         <Formik
           initialValues={{ postImage: "", postDescription: "" }}
           onSubmit={(values) => {
-            createPost(values.postImage, values.postDescription);
+            createPost(values.postImage, values.postDescription.trim());
           }}
           validationSchema={postSchema}
           component={PostForm}
