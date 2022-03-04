@@ -10,9 +10,9 @@ const usePosts = (): IPosts => {
   const [posts, setPosts] = useState<IPostValues[]>();
 
   const findPosts = async () => {
-    const result = await AsyncStorage.getItem("posts");
-    if (result !== null) {
-      setPosts(JSON.parse(result));
+    const postsFromAS = await AsyncStorage.getItem("posts");
+    if (postsFromAS !== null) {
+      setPosts(JSON.parse(postsFromAS));
     }
   };
 
