@@ -4,6 +4,8 @@ import {
   FlatList,
   ListRenderItem,
   SafeAreaView,
+  View,
+  Text,
 } from "react-native";
 import {
   Header,
@@ -36,8 +38,16 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
           onPressRightIcon={navigateToCreatePostScreen}
         />
       </SafeAreaView>
-      {!postValues ? (
-        <ActivityIndicator />
+      {postValues.length === 0 ? (
+        <View style={styles.noPostsContainer}>
+          <Text>
+            No posts exist at the moment, please create one by tapping on the
+            image icon in the header. In the meantime, as indicated by the
+            spinner below, we will continue to try to fetch posts in case some
+            do exist but are just loading slowly.
+          </Text>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
       ) : (
         <FlatList
           data={postValues}
