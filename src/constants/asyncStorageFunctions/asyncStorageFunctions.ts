@@ -13,7 +13,8 @@ export const getAllAsyncStorageData = async () => {
     }
     const result = Object.keys(allItemsFromAS);
     return (
-      console.log("All items: ", allItemsFromAS), console.log(typeof result)
+      //Useful console.log for displaying all items from Async Storage so I will leave it here
+      console.log("All items: ", allItemsFromAS)
     );
   } catch (error) {
     alert(error);
