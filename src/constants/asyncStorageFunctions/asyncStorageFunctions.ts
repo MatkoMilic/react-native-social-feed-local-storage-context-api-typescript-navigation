@@ -20,6 +20,11 @@ export const getAllAsyncStorageData = async () => {
   }
 };
 
+export const getAllPosts = async () => {
+  const allPosts = await AsyncStorage.getItem("posts");
+  return allPosts;
+};
+
 export const clearEntireAsyncStorage = async () => {
   await AsyncStorage.clear();
 };
