@@ -42,7 +42,9 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
         <FlatList
           data={postValues}
           renderItem={renderPost}
-          keyExtractor={(item) => item.uniquePostID}
+          keyExtractor={(item) => {
+            return item.uniquePostID;
+          }}
         />
       )}
     </ScreenContainer>
