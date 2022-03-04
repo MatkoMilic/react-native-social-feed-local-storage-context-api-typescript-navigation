@@ -1,50 +1,61 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, {
-  createContext,
-  FC,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
+import { getAllPosts } from "../../constants";
 import { IPostValues } from "../../types";
 
-//UNUSED CONTEXT
-
-interface UserDetailsProviderProps {
+interface PostsProviderProps {
   children?: React.ReactNode;
 }
 
-interface PostContextValues {
-  posts: [];
-  setPosts: React.Dispatch<React.SetStateAction<[]>>;
-  findPosts: () => Promise<void>;
+interface PostsContextProps {
+  postValues: IPostValues[];
+  setNewPost: React.Dispatch<React.SetStateAction<IPostValues[]>>;
 }
 
-export const PostContext = React.createContext<PostContextValues>(
-  {} as PostContextValues
+const PostsContext = React.createContext<PostsContextProps | undefined>(
+  undefined
 );
 
-export const PostProvider: FC<UserDetailsProviderProps> = ({ children }) => {
-  const [posts, setPosts] = useState<[]>([]);
+export const checkPostsContext = () => {
+  const postsContext = useContext(PostsContext);
+  if (postsContext === undefined) {
+    throw new Error("PostsContext must be within PostsProvider");
+  }
+  return postsContext;
+};
 
-  const findPosts = async () => {
-    const result = await AsyncStorage.getItem("posts");
-    if (result !== null) {
-      setPosts(JSON.parse(result));
+export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
+  const [currentPosts, setCurrentPosts] = useState<IPostValues[]>([]);
+
+  const fetchAllPosts = async () => {
+    const allPosts = await getAllPosts();
+    if (allPosts) {
+      setCurrentPosts(JSON.parse(allPosts));
     }
   };
 
+  const updatePosts = async (newPost: IPostValues) => {
+    setCurrentPosts([...currentPosts, newPost]);
+  };
+
   useEffect(() => {
-    findPosts();
+    fetchAllPosts();
   }, []);
 
+  const providerValues = React.useMemo(
+    () => ({
+      postValues: currentPosts,
+      setNewPost: setCurrentPosts,
+    }),
+    [currentPosts, updatePosts]
+  );
+
   return (
-    <PostContext.Provider value={{ posts, setPosts, findPosts }}>
+    <PostsContext.Provider value={providerValues}>
       {children}
-    </PostContext.Provider>
+    </PostsContext.Provider>
   );
 };
 
-PostProvider.defaultProps = {
+PostsProvider.defaultProps = {
   children: undefined,
 };
