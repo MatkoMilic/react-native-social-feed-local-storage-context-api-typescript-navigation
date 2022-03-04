@@ -13,12 +13,10 @@ import {
 } from "../../components";
 import { IMainNavScreenProps, IPostValues } from "../../types";
 import { styles } from "./style";
-//import { usePosts } from "../../utils";
 
 interface FeedScreenProps extends IMainNavScreenProps {}
 
 const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
-  //const { posts } = usePosts();
   const { postValues } = checkPostsContext();
   const navigateToCreatePostScreen = async () => {
     navigation.navigate("CreatePostScreen");
