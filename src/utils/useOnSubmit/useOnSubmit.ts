@@ -1,38 +1,22 @@
 import { Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
+import { checkPostsContext } from "../../stores";
 import { IPostValues, MainNavigationType } from "../../types";
-import { navigatorNames, FEED_SCREEN } from "../../constants";
-import { checkPostsContext } from "../../components";
 
 const useOnSubmit = (navigation: MainNavigationType) => {
   const { setNewPost } = checkPostsContext();
-
   const createPost = async (postImage: string, postDescription: string) => {
-    const posts = await AsyncStorage.getItem("posts");
-    let parsedPosts: IPostValues[] = [];
-    if (posts) {
-      parsedPosts = JSON.parse(posts);
-    }
     try {
       const postDetails: IPostValues = {
         postImage,
         postDescription,
         uniquePostID: uuid.v4().toString(),
       };
-      parsedPosts.push(postDetails);
       if (postImage == "" && postDescription.trim() == "") {
         Alert.alert("You cannot post an empty post.");
       } else {
-        setNewPost(parsedPosts);
-        await AsyncStorage.setItem("posts", JSON.stringify(parsedPosts)).catch(
-          (error) => {
-            console.log(error);
-          }
-        );
-        navigation.replace(navigatorNames.MAIN_NAVIGATOR, {
-          screen: FEED_SCREEN,
-        });
+        setNewPost(postDetails);
+        navigation.replace("FeedScreen");
       }
     } catch (err) {
       console.log(err);
