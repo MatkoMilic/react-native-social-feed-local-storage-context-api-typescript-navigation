@@ -5,13 +5,13 @@ import {
   CREATEPOST_SCREEN,
 } from "./screenNames/screenNames";
 import { navigatorNames } from "./navigatorNames/navigatorNames";
-import { HASHTAG_FORMATTER } from "./HASHTAG_FORMATTER/HASHTAG_FORMATTER";
-import { pickImage } from "./pickImage/pickImage";
+import { HASHTAG_FORMATTER } from "../infrastructure/HASHTAG_FORMATTER/HASHTAG_FORMATTER";
+import { pickImage } from "../infrastructure/pickImage/pickImage";
 import {
   getAllAsyncStorageData,
   clearEntireAsyncStorage,
   getAllPosts,
-} from "./asyncStorageFunctions/asyncStorageFunctions";
+} from "../infrastructure/asyncStorageFunctions/asyncStorageFunctions";
 import {
   OnboardingStackParamList,
   MainStackParamList,

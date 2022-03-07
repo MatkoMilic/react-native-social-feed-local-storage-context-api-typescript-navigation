@@ -7,12 +7,8 @@ import {
   View,
   Text,
 } from "react-native";
-import {
-  Header,
-  PostListItem,
-  ScreenContainer,
-  checkPostsContext,
-} from "../../components";
+import { Header, PostListItem, ScreenContainer } from "../../components";
+import { checkPostsContext } from "../../stores";
 import { IMainNavScreenProps, IPostValues } from "../../types";
 import { styles } from "./style";
 
