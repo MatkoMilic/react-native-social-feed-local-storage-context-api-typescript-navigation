@@ -9,18 +9,18 @@ import {
 } from "react-native";
 import { Header, PostListItem, ScreenContainer } from "../../components";
 import { checkPostsContext } from "../../stores";
-import { IMainNavScreenProps, IPostValues } from "../../types";
+import { IMainNavScreenProps, IPost } from "../../types";
 import { styles } from "./style";
 
 interface FeedScreenProps extends IMainNavScreenProps {}
 
 const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
-  const { postValues } = checkPostsContext();
+  const { postsSortedByDate } = checkPostsContext();
   const navigateToCreatePostScreen = async () => {
     navigation.navigate("CreatePostScreen");
   };
 
-  const renderPost: ListRenderItem<IPostValues> = ({ item }) => (
+  const renderPost: ListRenderItem<IPost> = ({ item }) => (
     <PostListItem post={item} key={item.uniquePostID} />
   );
 
@@ -34,7 +34,7 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
           onPressRightIcon={navigateToCreatePostScreen}
         />
       </SafeAreaView>
-      {postValues.length === 0 ? (
+      {postsSortedByDate.length === 0 ? (
         <View style={styles.noPostsContainer}>
           <Text>
             No posts exist at the moment, please create one by tapping on the
@@ -46,11 +46,9 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
         </View>
       ) : (
         <FlatList
-          data={postValues}
+          data={postsSortedByDate}
           renderItem={renderPost}
-          keyExtractor={(item) => {
-            return item.uniquePostID;
-          }}
+          keyExtractor={(item: IPost) => item.uniquePostID}
         />
       )}
     </ScreenContainer>
