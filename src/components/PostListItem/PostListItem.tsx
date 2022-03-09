@@ -1,12 +1,13 @@
 import React from "react";
 import { Image, Text, View, Dimensions } from "react-native";
 import Lightbox from "react-native-lightbox-v2";
-import { HASHTAG_FORMATTER } from "../../constants";
-import { IPostValues } from "../../types";
+import { defaultPostDescription } from "./PostListItemConsts";
+import { IPost } from "../../types";
+import { hashtagFormatter } from "../../utils";
 import { styles } from "./styles";
 
 interface PostItemProps {
-  post: IPostValues;
+  post: IPost;
 }
 
 const { height, width } = Dimensions.get("window");
@@ -20,7 +21,7 @@ const PostListItem: React.FC<PostItemProps> = ({ post }) => {
             return (
               <Image
                 source={{ uri: post.postImage }}
-                resizeMode="stretch"
+                resizeMode="cover"
                 style={[
                   styles.imageInLightbox,
                   {
@@ -41,9 +42,11 @@ const PostListItem: React.FC<PostItemProps> = ({ post }) => {
       ) : null}
       {post.postDescription ? (
         <Text style={styles.textStyle}>
-          {HASHTAG_FORMATTER(post.postDescription)}
+          {hashtagFormatter(post.postDescription)}
         </Text>
-      ) : null}
+      ) : (
+        <Text style={styles.textStyle}>{defaultPostDescription}</Text>
+      )}
     </View>
   );
 };
