@@ -4,13 +4,13 @@ import { Formik } from "formik";
 import { Header, ScreenContainer, PostForm } from "../../components";
 import { IMainNavScreenProps } from "../../types";
 import { postSchema } from "../../validation";
-import { useOnSubmit } from "../../utils";
+import { useOnSubmitPost } from "./useOnSubmitPost";
 import { styles } from "./style";
 
 interface CreatePostScreenProps extends IMainNavScreenProps {}
 
 const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
-  const { createPost } = useOnSubmit(navigation);
+  const { createNewPost } = useOnSubmitPost(navigation);
 
   const navigateToFeedScreen = async () => {
     navigation.replace("FeedScreen");
@@ -30,7 +30,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
         <Formik
           initialValues={{ postImage: "", postDescription: "" }}
           onSubmit={(values) => {
-            createPost(values.postImage, values.postDescription.trim());
+            createNewPost(values.postImage, values.postDescription.trim());
           }}
           validationSchema={postSchema}
           component={PostForm}
