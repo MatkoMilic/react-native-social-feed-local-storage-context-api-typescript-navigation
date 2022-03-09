@@ -16,7 +16,7 @@ interface MainNavigatorProps {
 
 const MainStack = createNativeStackNavigator();
 
-const MainNavigator: FC<MainNavigatorProps> = ({ navigation }) => {
+const MainNavigator: FC<MainNavigatorProps> = () => {
   return (
     <MainStack.Navigator
       screenOptions={{ headerShown: false }}
