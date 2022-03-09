@@ -1,15 +1,15 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getAllPosts } from "../../constants";
-import { IPostValues } from "../../types";
+import { IPost } from "../../types";
+import { getID, getStoragePosts, setStoragePosts } from "../../utils";
 
 interface PostsProviderProps {
   children?: React.ReactNode;
 }
 
 interface PostsContextProps {
-  postValues: IPostValues[];
-  setNewPost: (newPost: IPostValues) => Promise<void>;
+  posts: IPost[];
+  postsSortedByDate: IPost[];
+  createPost: (postImage: string, postDescription: string) => Promise<void>;
 }
 
 const PostsContext = React.createContext<PostsContextProps | undefined>(
@@ -18,40 +18,61 @@ const PostsContext = React.createContext<PostsContextProps | undefined>(
 
 export const checkPostsContext = () => {
   const postsContext = useContext(PostsContext);
+
   if (postsContext === undefined) {
     throw new Error("PostsContext must be within PostsProvider");
   }
+
   return postsContext;
 };
 
 export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
-  const [posts, setPosts] = useState<IPostValues[]>([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
-  const setDefaultPostsState = async () => {
-    const allPosts = await getAllPosts();
+  const setDefaultPosts = async () => {
+    const allPosts = await getStoragePosts();
+
     setPosts(allPosts);
   };
 
-  const savePost = async (newPost: IPostValues) => {
-    const oldAndNewPosts = [...posts, newPost];
-    setPosts(oldAndNewPosts);
-    await AsyncStorage.setItem("posts", JSON.stringify(oldAndNewPosts)).catch(
-      (error) => {
-        console.log(error);
-      }
-    );
+  const postsSortedByDate = posts
+    .slice()
+    .sort((dateTimeOfPost: IPost, currentDateTime: IPost) => {
+      return (
+        Date.parse(currentDateTime.dateAndTime) -
+        Date.parse(dateTimeOfPost.dateAndTime)
+      );
+    });
+
+  const createPost = async (postImage: string, postDescription: string) => {
+    try {
+      const postDetails: IPost = {
+        postImage,
+        postDescription,
+        uniquePostID: getID(),
+        dateAndTime: new Date().toLocaleString(),
+      };
+
+      const updatedPosts = [...posts, postDetails];
+      setPosts(updatedPosts);
+
+      await setStoragePosts(updatedPosts);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
-    setDefaultPostsState();
+    setDefaultPosts();
   }, []);
 
   const providerValues = React.useMemo(
     () => ({
-      postValues: posts,
-      setNewPost: savePost,
+      posts,
+      postsSortedByDate,
+      createPost,
     }),
-    [posts, savePost]
+    [posts]
   );
 
   return (
