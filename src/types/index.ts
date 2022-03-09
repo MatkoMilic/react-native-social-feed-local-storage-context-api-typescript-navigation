@@ -6,5 +6,5 @@ export type {
   IOnboardingNavScreenProps,
   OnboardingNavigationType,
 } from "./IOnboardingNavScreenProps/IOnboardingNavScreenProps";
-export type { IPostValues } from "./IPostValues/IPostValues";
-export { initialPostValues } from "./IPostValues/IPostValues";
+export type { IPost } from "./IPost/IPost";
+export { initialPost } from "./IPost/IPost";

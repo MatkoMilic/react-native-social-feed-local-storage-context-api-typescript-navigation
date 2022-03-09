@@ -5,13 +5,6 @@ import {
   CREATEPOST_SCREEN,
 } from "./screenNames/screenNames";
 import { navigatorNames } from "./navigatorNames/navigatorNames";
-import { HASHTAG_FORMATTER } from "../infrastructure/HASHTAG_FORMATTER/HASHTAG_FORMATTER";
-import { pickImage } from "../infrastructure/pickImage/pickImage";
-import {
-  getAllAsyncStorageData,
-  clearEntireAsyncStorage,
-  getAllPosts,
-} from "../infrastructure/asyncStorageFunctions/asyncStorageFunctions";
 import {
   OnboardingStackParamList,
   MainStackParamList,
@@ -25,11 +18,6 @@ export {
   FEED_SCREEN,
   CREATEPOST_SCREEN,
   navigatorNames,
-  pickImage,
-  getAllAsyncStorageData,
-  clearEntireAsyncStorage,
-  HASHTAG_FORMATTER,
-  getAllPosts,
 };
 
 export type {
