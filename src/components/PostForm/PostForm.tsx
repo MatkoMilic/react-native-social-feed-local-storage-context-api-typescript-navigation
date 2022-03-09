@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Button } from "react-native-elements";
 import { FormikProps } from "formik";
-import { pickImage } from "../../constants";
+import { pickImage } from "../../utils";
 import { styles } from "./styles";
 
 interface FormikValues {
