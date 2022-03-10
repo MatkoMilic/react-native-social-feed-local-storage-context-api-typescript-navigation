@@ -21,7 +21,7 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
   };
 
   const renderPost: ListRenderItem<IPost> = ({ item }) => (
-    <PostListItem post={item} key={item.uniquePostID} />
+    <PostListItem post={item} />
   );
 
   return (

@@ -14,7 +14,7 @@ const { height, width } = Dimensions.get("window");
 
 const PostListItem: React.FC<PostItemProps> = ({ post }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={post.uniquePostID}>
       {post.postImage ? (
         <Lightbox
           renderContent={() => {
