@@ -6,7 +6,12 @@ export const getStoragePosts = async (): Promise<IPost[]> => {
   if (!allPosts) {
     return [];
   }
-  return JSON.parse(allPosts);
+  const allPostsParsed: IPost[] = JSON.parse(allPosts);
+  const allPostsMapped = allPostsParsed.map((p: IPost) => ({
+    ...p,
+    postCreationDateAndTime: new Date(p.postCreationDateAndTime),
+  }));
+  return allPostsMapped;
 };
 
 export const setStoragePosts = async (posts: IPost[]): Promise<void> => {
