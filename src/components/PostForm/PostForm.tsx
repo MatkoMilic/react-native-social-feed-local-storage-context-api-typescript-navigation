@@ -25,6 +25,24 @@ const PostForm: React.FC<FormikProps<FormikValues>> = ({
   handleSubmit,
 }) => {
   const [image, setImage] = useState("");
+
+  const uploadImage = async (handleChange: {
+    (e: React.ChangeEvent<any>): void;
+    <T = string | React.ChangeEvent<any>>(
+      field: T
+    ): T extends React.ChangeEvent<any>
+      ? void
+      : (e: string | React.ChangeEvent<any>) => void;
+  }) => {
+    try {
+      const uri = await pickImage();
+      handleChange(uri);
+      setImage(uri);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ScrollView
       style={styles.postFormContainer}
@@ -41,7 +59,7 @@ const PostForm: React.FC<FormikProps<FormikValues>> = ({
           <TouchableOpacity
             style={styles.imagePlaceholder}
             onPress={() => {
-              pickImage(handleChange("postImage"), setImage);
+              uploadImage(handleChange("postImage"));
             }}
           >
             <Text>Press to upload new image</Text>
