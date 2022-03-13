@@ -21,7 +21,7 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
   };
 
   const renderPost: ListRenderItem<IPost> = ({ item }) => (
-    <PostListItem post={item} />
+    <PostListItem post={item} key={item.uniquePostID} />
   );
 
   return (
@@ -48,7 +48,10 @@ const FeedScreen: React.FC<FeedScreenProps> = ({ navigation }) => {
         <FlatList
           data={postsSortedByDate}
           renderItem={renderPost}
-          keyExtractor={(item: IPost) => item.uniquePostID}
+          keyExtractor={(item, index) => {
+            console.log("IDS:", item.uniquePostID.toString());
+            return item.uniquePostID.toString();
+          }}
         />
       )}
     </ScreenContainer>
