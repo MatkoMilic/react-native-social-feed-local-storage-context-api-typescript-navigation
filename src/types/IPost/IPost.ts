@@ -2,12 +2,12 @@ export interface IPost {
   postImage: string;
   postDescription: string;
   uniquePostID: string;
-  dateAndTime: string;
+  postCreationDateAndTime: Date;
 }
 
 export const initialPost = (): IPost => ({
   postImage: "",
   postDescription: "",
   uniquePostID: "",
-  dateAndTime: "",
+  postCreationDateAndTime: new Date(),
 });
