@@ -39,8 +39,8 @@ export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
     .slice()
     .sort((dateTimeOfPost: IPost, currentDateTime: IPost) => {
       return (
-        Date.parse(currentDateTime.dateAndTime) -
-        Date.parse(dateTimeOfPost.dateAndTime)
+        currentDateTime.postCreationDateAndTime.getTime() -
+        dateTimeOfPost.postCreationDateAndTime.getTime()
       );
     });
 
@@ -50,7 +50,7 @@ export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
         postImage,
         postDescription,
         uniquePostID: getID(),
-        dateAndTime: new Date().toLocaleString(),
+        postCreationDateAndTime: new Date(),
       };
 
       const updatedPosts = [...posts, postDetails];
