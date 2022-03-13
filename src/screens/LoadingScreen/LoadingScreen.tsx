@@ -9,8 +9,8 @@ interface LoadingScreenProps extends IOnboardingNavScreenProps {}
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ navigation }) => {
   const chooseNavigator = async () => {
     // if we add autentification system here is where logic for re routing will be,
-    // or some other check before starting the app, for now user will be automatically
-    // sent to login screen where he can press a button to go to app FEED.
+    // or some other check before starting the app, for now users will be automatically
+    // sent to login screen where they can press a button to go to app FEED.
     navigation.navigate("LoginScreen");
   };
 
