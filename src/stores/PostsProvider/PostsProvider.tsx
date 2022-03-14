@@ -8,6 +8,7 @@ interface PostsProviderProps {
 
 interface PostsContextProps {
   posts: IPost[];
+  hasPosts: boolean;
   postsSortedByDate: IPost[];
   createPost: (postImage: string, postDescription: string) => Promise<void>;
 }
@@ -29,11 +30,7 @@ export const checkPostsContext = () => {
 export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
   const [posts, setPosts] = useState<IPost[]>([]);
 
-  const setDefaultPosts = async () => {
-    const allPosts = await getStoragePosts();
-
-    setPosts(allPosts);
-  };
+  const hasPosts = posts.length > 0;
 
   const postsSortedByDate = posts
     .slice()
@@ -43,6 +40,12 @@ export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
         dateTimeOfPost.postCreationDateAndTime.getTime()
       );
     });
+
+  const setDefaultPosts = async () => {
+    const allPosts = await getStoragePosts();
+
+    setPosts(allPosts);
+  };
 
   const createPost = async (postImage: string, postDescription: string) => {
     try {
@@ -69,6 +72,7 @@ export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
   const providerValues = React.useMemo(
     () => ({
       posts,
+      hasPosts,
       postsSortedByDate,
       createPost,
     }),
